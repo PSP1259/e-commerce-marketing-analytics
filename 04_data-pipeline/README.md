@@ -38,11 +38,7 @@ Each file includes the following dimensions and metrics:
 
 Output files:
 
-04_data-pipeline/data/
-view_item.csv/
-add_to_cart.csv/
-begin_checkout.csv/
-purchase.csv/
+04_data-pipeline/data/ `view_item.csv` `add_to_cart.csv` `begin_checkout.csv` `purchase.csv`
 
 ## How It Works (Process Flow)
 
