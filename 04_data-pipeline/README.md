@@ -1,38 +1,78 @@
-# 04 – Data Pipeline (GA4 → Python)
+# 04_data-pipeline – GA4 Event Export
 
-Dieses Verzeichnis enthält das Skript, das Events aus GA4 über die GA4 Data API exportiert.
+This folder contains the complete data extraction layer for the Siete Padel analytics project.  
+It pulls **e-commerce funnel events** from Google Analytics 4 via the **GA4 Data API** using a service account.
 
-## Dateien
+All exported data is written to local CSV files and ignored by Git version control.
 
-- `extract_ga4_events.py` – ruft die GA4 Data API auf und exportiert Events als CSV.
-- `config_example.yaml` – Beispielkonfiguration (ohne echte IDs/Keys).
-- `config.yaml` – lokale Konfiguration mit echter Property-ID und Key-Pfad (nicht ins Repo committen).
-- `data/` – Output-Ordner für CSV-Exporte (im `.gitignore`).
+## Folder Contents
 
-In diesem Teil des Projekts baue ich eine kleine, aber saubere Datenpipeline auf Basis der **GA4 Data API**.
+| File / Folder | Description | Version Control |
+|---------------|-------------|----------------|
+| `extract_ga4_events.py` | Main ETL script. Authenticates via service account, queries GA4, exports event data.
+| `config_example.yaml` | Template configuration with placeholder values for onboarding.
+| `config.yaml` | Local configuration containing real GA4 property ID + credential path.
+| `data/` | Output folder containing generated CSV files (one per event).
+| `requirements.txt` | Python dependencies required for local execution.
+| `README.md` | Documentation for this pipeline. 
 
-Ziel:
+No credentials, tokens, raw export data, or virtual environments are committed to the repository.
 
-- ausgewählte GA4-Events (z. B. `view_item`, `add_to_cart`, `begin_checkout`, `purchase`) automatisiert abfragen
-- die Daten lokal als CSV ablegen
-- sie später für Funnel-Analysen und Dashboards verwenden
+## Export Scope
 
-Später kommen hier noch:
+The script exports the following GA4 ecommerce events:
 
-- ein Notebook für Funnel-Analysen
-- eventuell eine Erweiterung Richtung BigQuery oder Looker Studio
+- `view_item`
+- `add_to_cart`
+- `begin_checkout`
+- `purchase`
 
-## Setup und Ausführung
+Each file includes the following dimensions and metrics:
 
-Die Pipeline wird lokal ausgeführt und nutzt eine Python Umgebung mit Service Account.
+| Column | Meaning |
+|--------|---------|
+| date | Event date (YYYYMMDD format from GA4) |
+| item_name | Name of the product associated with the event |
+| event_name | The exact GA4 event type |
+| event_count | Number of occurrences |
 
-### 1. Virtuelle Umgebung erstellen und Pakete installieren
+Expected output files:
+
+04_data-pipeline/data/
+├─ view_item.csv
+├─ add_to_cart.csv
+├─ begin_checkout.csv
+└─ purchase.csv
+
+## How It Works (Process Flow)
+
+1. Load config (`config.yaml` preferred, fallback: `config_example.yaml`)
+2. Build GA4 API client from service account JSON key
+3. Loop through the event list defined in configuration
+4. Execute **RunReportRequest** with:
+   - Metrics: `eventCount`
+   - Dimensions: `date`, `itemName`, `eventName`
+   - Filter by event name
+5. Save results to a dedicated CSV file per event
+
+Console output example:
+
+Fetching: view_item
+Exported: ...\data\view_item.csv
+Fetching: add_to_cart
+Exported: ...\data\add_to_cart.csv
+
+## Local Execution
 
 ```bash
 python -m venv .venv
-# Windows Aktivierung
-.venv\Scripts\activate
-
+.venv\Scripts\activate    # Windows
 pip install -r 04_data-pipeline/requirements.txt
+python 04_data-pipeline/extract_ga4_events.py
+
+google-analytics-data
+google-auth
+PyYAML
+pandas
 
 
