@@ -1,10 +1,10 @@
 ga4:
-  property_id: "513248392"
-  key_file: "C:\Users\psp\Documents\siete-marketing-analytics"
+  property_id: "xxxxxxxxx"
+  key_file: "path"
 
 export:
-  start_date: "2024-10-01"
-  end_date: "2024-10-31"
+  start_date: "2025-01-01"
+  end_date: "2025-12-31"
 
   events:
     - "view_item"
