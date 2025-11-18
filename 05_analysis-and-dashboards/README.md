@@ -1,16 +1,15 @@
 # 05 – Analysis & Dashboards
 
-In diesem Teil des Projekts werte ich die exportierten GA4 Eventdaten aus und überführe sie in verständliche Funnel- und Performanceanalysen für siete.ch.
+This part of the project focuses on transforming GA4 event exports into meaningful business insights for the Siete Padel shop.
 
-Ziele:
+Objectives:
 
-- einfachen E-Commerce Funnel nachbilden  
-- Conversion Rates zwischen `view_item`, `add_to_cart`, `begin_checkout` und `purchase` berechnen  
-- erste KPI Definitionen für einen kleinen Padelshop dokumentieren  
+- Reconstruct a simple e-commerce funnel  
+- Calculate conversion rates between `view_item`, `add_to_cart`, `begin_checkout`, and `purchase`  
+- Define initial KPI metrics tailored to a small padel e-commerce store  
 
-Geplante Artefakte:
+Planned deliverables:
 
-- Jupyter Notebook mit Auswertungen auf Basis der CSV Exporte  
-- einfache Visualisierungen von Funnel und Drop-offs  
-- Definition zentraler Kennzahlen (z. B. CVR, AOV, Warenkorbquote)
+- Jupyter Notebook containing data transformations and ana
+
 
