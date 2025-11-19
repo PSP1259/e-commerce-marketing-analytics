@@ -1,15 +1,19 @@
-ga4:
-  property_id: xxxxxxxxx
-  key_file: "path/to/your/service-account.json"
+# Configuration file for GA4 data pipeline
+# This file defines all configuarion parameters needed to run the data pipeline.
+# It allows me to run the pipeline fully dynamically without hard-coding any values inside the python code.
 
-export:
+ga4: # GA4 property and path to the Google Cloud service account key file to authenticate against the GA4 Data API
+  property_id: xxxxxxxxx
+  key_file: "service-account.json"
+
+export: # Date range for the GA4 API export
   start_date: '2025-11-01'
   end_date: '2025-11-30'
 
-  events:
+  events: # List of GA4 events to export
     - view_item
     - add_to_cart
     - begin_checkout
     - purchase
 
-  output_folder: 'data'
+  output_folder: 'data' # Output location for the exported CSV files
