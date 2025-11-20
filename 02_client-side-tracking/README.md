@@ -1,6 +1,6 @@
 # 02 – Client-side Tracking
 
-For the siete.ch shop, I implemented a clean, minimal and fully client-side tracking setup.
+For the siete.ch shop, I implemented a minimal and fully client-side tracking setup.
 
 Technologies used:
 

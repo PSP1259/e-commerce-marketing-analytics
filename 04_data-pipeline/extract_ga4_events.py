@@ -122,7 +122,6 @@ def main():
     4. Request event data from GA4 API 
     5. Export each event to CSV file
     """
-
     cfg = load_config()                                                    
     client = get_client(cfg["ga4"]["key_file"])
     property_id = cfg["ga4"]["property_id"] 
